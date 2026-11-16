@@ -1,0 +1,25 @@
+# Deshabilitar el listado de directorios (Ciberseguridad OWASP)
+Options -Indexes
+
+# Activar motor de reescritura para URLs limpias
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Bloquear acceso a archivos ocultos (.env, .git, etc.) por si acaso
+    RewriteRule (^\.|/\.) - [F]
+
+    # Si el archivo o carpeta existe físicamente en /public (css, img, fonts), servirlo directo
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # De lo contrario, enviar la petición al controlador frontal index.php
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+# Cabeceras de Seguridad Básicas (Compatibles con XAMPP y Debian)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

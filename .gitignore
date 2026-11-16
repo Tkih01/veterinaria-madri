@@ -1,0 +1,24 @@
+
+#Variables de entorno y credenciales
+.env
+.env.local
+.env.production
+
+#Archivos del OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+#Archivos de IDEs
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+#Logs y archivos temporales
+
+*.log
+tmp/
+temp/

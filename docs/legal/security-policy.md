@@ -1,0 +1,13 @@
+# Política de Ciberseguridad y Controles OWASP — Veterinaria Madri
+
+> **Clasificación del documento:** Uso interno y auditoría técnica (ubicado fuera del directorio público `/public/` de Apache para evitar *Information Disclosure*). Para comunicación hacia clientes en el portal web se utilizará únicamente una síntesis no técnica.
+
+Este proyecto implementa controles técnicos alineados al estándar **OWASP Top 10 (2021)** y **OWASP ASVS (Application Security Verification Standard)**:
+
+| Categoría OWASP | Control Técnico Implementado en el Sistema |
+| :--- | :--- |
+| **A01: Broken Access Control** *(ASVS V4)* | Separación estricta de rutas públicas y administrativas mediante middleware de sesión y validación de rol (`admin`). Enmascaramiento obligatorio de datos identificativos del propietario en consultas públicas y control de tasa de peticiones (*Rate Limiting*) en el buscador de folios `VM-XXXX` para impedir la enumeración automatizada de expedientes. |
+| **A02: Cryptographic Failures** *(ASVS V2 / V6)* | Contraseñas administrativas almacenadas exclusivamente mediante hash **Argon2id** (`PASSWORD_ARGON2ID`). Credenciales de base de datos y llaves secretas aisladas en archivo `.env` excluido del control de versiones mediante `.gitignore`. |
+| **A03: Injection (SQLi / XSS)** *(ASVS V5)* | Prohibición absoluta de concatenar variables en consultas SQL; uso exclusivo de **PDO Prepared Statements** nativos (`ATTR_EMULATE_PREPARES => false`). Validación estricta de tipos de entrada y codificación sistemática de salida HTML mediante `htmlspecialchars($val, ENT_QUOTES, 'UTF-8')`. |
+| **A05: Security Misconfiguration** *(ASVS V14)* | `DocumentRoot` de Apache aislado exclusivamente en `/public`, bloqueando acceso web a `/src`, `/database` y `/docs`. Desactivación de listado de directorios (`Options -Indexes`), usuario de MariaDB bajo **Principio de Mínimo Privilegio** (solo `SELECT, INSERT, UPDATE, DELETE` sobre `vetmadri_db`, sin `DROP`, `ALTER` ni `GRANT`), y cabeceras HTTP de seguridad: `Strict-Transport-Security` (HSTS en HTTPS), `Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options` y `Referrer-Policy`. |
+| **A07: Identification & Auth Failures** *(ASVS V2 / V3)* | Regeneración de identificador de sesión tras autenticarse (`session_regenerate_id(true)`), cookies técnicas configuradas con atributos `HttpOnly`, `SameSite=Strict` y `Secure` (en producción HTTPS), tokens criptográficos anti-CSRF por formulario y bloqueo temporal tras múltiples intentos fallidos de inicio de sesión (*Rate Limiting*). |
