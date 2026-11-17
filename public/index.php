@@ -11,6 +11,7 @@ declare(strict_types=1);
 define('BASE_PATH', dirname(__DIR__));
 
 require_once BASE_PATH . '/src/config/Env.php';
+require_once BASE_PATH . '/src/config/Database.php';
 
 use App\Config\Env;
 

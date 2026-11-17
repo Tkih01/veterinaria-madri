@@ -1,69 +1,30 @@
+
 <?php
+use App\Config\Database;
 use function App\Config\e;
 
-// Datos iniciales del catálogo vitrina (en la Fase 3/4 se alimentarán directamente desde MariaDB)
-$productos = [
-    [
-        'sku'            => 'PROD-001',
-        'nombre'         => 'Antipulgas y Garrapatas Masticable (Perro Mediano 10-20 kg)',
-        'categoria'      => 'Farmacia y Prevención',
-        'descripcion'    => 'Tableta masticable de acción mensual contra pulgas, garrapatas y ácaros.',
-        'precio'         => 380.00,
-        'disponibilidad' => 'Disponible',
-        'badge_class'    => 'badge-ok',
-        'imagen'         => null
-    ],
-    [
-        'sku'            => 'PROD-002',
-        'nombre'         => 'Pipeta Desparasitante Felina Multi-Espectro',
-        'categoria'      => 'Farmacia y Prevención',
-        'descripcion'    => 'Aplicación tópica mensual para gatos de 2.5 a 7.5 kg.',
-        'precio'         => 310.00,
-        'disponibilidad' => 'Disponible',
-        'badge_class'    => 'badge-ok',
-        'imagen'         => null
-    ],
-    [
-        'sku'            => 'PROD-003',
-        'nombre'         => 'Alimento Seco Mantenimiento Adulto Raza Pequeña (Bulto 4 kg)',
-        'categoria'      => 'Nutrición Clínica',
-        'descripcion'    => 'Fórmula balanceada de alta digestibilidad con proteínas seleccionadas y ácidos grasos Omega 3 y 6.',
-        'precio'         => 540.00,
-        'disponibilidad' => 'Pocas unidades',
-        'badge_class'    => 'badge-warn',
-        'imagen'         => null
-    ],
-    [
-        'sku'            => 'PROD-004',
-        'nombre'         => 'Shampoo Dermatológico Calmante con Avena (250 ml)',
-        'categoria'      => 'Higiene y Dermatología',
-        'descripcion'    => 'Auxiliar en el cuidado de piel sensible o con prurito en perros y gatos.',
-        'precio'         => 225.00,
-        'disponibilidad' => 'Disponible',
-        'badge_class'    => 'badge-ok',
-        'imagen'         => null
-    ],
-    [
-        'sku'            => 'PROD-005',
-        'nombre'         => 'Collar Isabelino Transparente Ajustable (Talla M)',
-        'categoria'      => 'Recuperación y Accesorios',
-        'descripcion'    => 'Protección postoperatoria cómoda con cierre seguro para evitar el lamido de heridas o suturas.',
-        'precio'         => 145.00,
-        'disponibilidad' => 'Disponible',
-        'badge_class'    => 'badge-ok',
-        'imagen'         => null
-    ],
-    [
-        'sku'            => 'PROD-006',
-        'nombre'         => 'Suplemento Articular con Condroitina y Glucosamina (60 tabs)',
-        'categoria'      => 'Suplementos',
-        'descripcion'    => 'Apoyo nutricional para mascotas adultas mayores o en recuperación ortopédica.',
-        'precio'         => 460.00,
-        'disponibilidad' => 'Agotado',
-        'badge_class'    => 'badge-danger',
-        'imagen'         => null
-    ],
-];
+$productos = [];
+try {
+    $db = Database::getConnection();
+    $stmt = $db->query("
+        SELECT sku, nombre, categoria, descripcion, precio_mxn AS precio, disponibilidad, imagen_webp AS imagen
+        FROM productos
+        WHERE activo = 1
+        ORDER BY id ASC
+    ");
+    $rows = $stmt->fetchAll();
+
+    foreach ($rows as $row) {
+        $row['badge_class'] = match ($row['disponibilidad']) {
+            'Disponible'     => 'badge-ok',
+            'Pocas unidades' => 'badge-warn',
+            default          => 'badge-danger',
+        };
+        $productos[] = $row;
+    }
+} catch (\Throwable $ex) {
+    $productos = [];
+}
 ?>
 
 <section class="page-header">

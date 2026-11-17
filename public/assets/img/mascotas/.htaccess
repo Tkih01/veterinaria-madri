@@ -1,0 +1,7 @@
+# Bloquear ejecución de cualquier script en la carpeta de fotos de mascotas (OWASP)
+<FilesMatch "\.(php|phtml|php5|php7|php8|phar|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
