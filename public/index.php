@@ -12,6 +12,12 @@ define('BASE_PATH', dirname(__DIR__));
 
 require_once BASE_PATH . '/src/config/Env.php';
 require_once BASE_PATH . '/src/config/Database.php';
+require_once BASE_PATH . '/src/config/ImageUploader.php';
+require_once BASE_PATH . '/src/middlewares/Csrf.php';
+require_once BASE_PATH . '/src/middlewares/RateLimiter.php';
+require_once BASE_PATH . '/src/middlewares/Auth.php';
+require_once BASE_PATH . '/src/controllers/AuthController.php';
+require_once BASE_PATH . '/src/controllers/AdminController.php';
 
 use App\Config\Env;
 
@@ -64,8 +70,13 @@ if ($isHttps) {
 $rawUrl = $_GET['url'] ?? '';
 $route  = trim( filter_var($rawUrl, FILTER_SANITIZE_URL), '/' );
 // 6. Mapa de rutas públicas (Fase 2)
-
+if ($route === 'admin/logout') {
+    \App\Middlewares\Auth::logout();
+    header('Location: /admin/login');
+    exit;
+}
 $routes = [
+
     ''                     => ['view' => 'pages/home.php',       'title' => 'Inicio | Atención Veterinaria en Aguascalientes'],
     'servicios'            => ['view' => 'pages/servicios.php',  'title' => 'Servicios Clínicos y Preventivos'],
     'productos'            => ['view' => 'pages/productos.php',  'title' => 'Catálogo de Productos en Clínica'],
@@ -73,6 +84,8 @@ $routes = [
     'expediente'           => ['view' => 'pages/expediente.php', 'title' => 'Consulta de Historial Clínico de Mascotas'],
     'aviso-privacidad'     => ['view' => 'pages/privacidad.php', 'title' => 'Aviso de Privacidad Integral'],
     'terminos-condiciones' => ['view' => 'pages/terminos.php',   'title' => 'Términos y Condiciones de Uso'],
+    'admin/login'          => ['view' => 'admin/login.php',     'title' => 'Acceso Administrativo'],
+    'admin'                => ['view' => 'admin/dashboard.php', 'title' => 'Panel Clínico Administrativo'],
 ];
 
 if (array_key_exists($route, $routes)) {

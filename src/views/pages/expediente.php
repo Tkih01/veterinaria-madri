@@ -26,8 +26,12 @@ $mensajeError      = null;
 $busquedaRealizada = ($folioInput !== '' || $mascotaInput !== '' || $verificacionInput !== '');
 
 if ($busquedaRealizada) {
-    try {
-        $db = Database::getConnection();
+    if (\App\Middlewares\RateLimiter::isBlocked('busqueda_folio')) {
+        $mensajeError = 'Has realizado demasiadas consultas fallidas seguidas. Por seguridad, espera 15 minutos antes de intentar nuevamente.';
+    } else {
+        try {
+            $db = Database::getConnection();
+            // ... (mantén aquí el resto de tu bloque try exactamente igual)
 
         if ($folioInput !== '') {
             $folioNormalizado = strtoupper($folioInput);
@@ -81,18 +85,14 @@ if ($busquedaRealizada) {
         }
 
         // Si se encontró la mascota, cargar su historial clínico ordenado por fecha DESC
-        if ($resultado !== null) {
-            $stmtHist = $db->prepare("
-                SELECT fecha_atencion, tipo_atencion, titulo, descripcion, peso_consulta, proximo_refuerzo
-                FROM historial_clinico
-                WHERE mascota_id = :mascota_id
-                ORDER BY fecha_atencion DESC, id DESC
-            ");
-            $stmtHist->execute([':mascota_id' => $resultado['id']]);
-            $resultado['historial'] = $stmtHist->fetchAll();
+        if ($resultado === null) {
+            \App\Middlewares\RateLimiter::registerFailure('busqueda_folio', 15, 15);
+        } else {
+            \App\Middlewares\RateLimiter::clear('busqueda_folio');
         }
-    } catch (\Throwable $ex) {
-        $mensajeError = 'No fue posible consultar la base de datos en este momento. Asegúrate de haber importado schema.sql y seeds.sql.';
+            } catch (\Throwable $ex) {
+        $mensajeError = 'No fue posible consultar la base de datos en este momento.';
+        }
     }
 }
 ?>

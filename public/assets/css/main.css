@@ -317,7 +317,7 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   6. COMPONENTES UI EMPRESARIALES (BOTONES, TARJETAS, INPUTS, BADGES)
+   6. COMPONENTES UI (BOTONES, TARJETAS, INPUTS, BADGES)
    -------------------------------------------------------------------------- */
 
 /* Botones con área táctil mínima de 44x44px */
@@ -970,3 +970,120 @@ a:hover {
     object-fit: cover;
 }
 
+/* --------------------------------------------------------------------------
+   10. PANEL ADMINISTRATIVO, TABLAS DE GESTIÓN Y CARNET QR IMPRIMIBLE
+   -------------------------------------------------------------------------- */
+.admin-topbar {
+    background-color: var(--color-dark);
+    color: var(--color-surface);
+    padding: var(--space-2) 0;
+    margin-bottom: var(--space-4);
+}
+
+.admin-topbar-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.admin-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+@media (min-width: 64rem) {
+    .admin-layout-grid {
+        grid-template-columns: 7fr 5fr;
+        align-items: start;
+    }
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+}
+
+@media (min-width: 48rem) {
+    .form-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: var(--space-1-5, 0.75rem) var(--space-2);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background-color: var(--color-bg-main);
+    color: var(--color-dark);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+}
+
+.admin-table tr:hover td {
+    background-color: #F1F5F9;
+}
+
+/* Tarjeta de Carnet Físico / QR */
+.qr-carnet-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    background-color: var(--color-bg-main);
+    border: 2px dashed var(--color-border-focus);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    margin-top: var(--space-2);
+}
+
+.qr-canvas-container {
+    width: 9rem;  /* 144px (18 x 8pt) */
+    height: 9rem;
+    background-color: var(--color-surface);
+    padding: var(--space-1);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Modo de impresión exclusivo para etiqueta / carnet QR */
+@media print {
+    .site-header,
+    .site-footer,
+    .admin-topbar,
+    .no-print {
+        display: none !important;
+    }
+    body {
+        background-color: #FFFFFF;
+    }
+    .card {
+        box-shadow: none;
+        border: 1px solid #000000;
+    }
+}

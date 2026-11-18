@@ -5,7 +5,7 @@ use function App\Config\e;
 <section class="hero-section">
     <div class="container hero-layout">
         <div>
-            <span class="hero-eyebrow">Clínica Veterinaria en Villas de Ntra. Sra. de la Asunción</span>
+            
             <h1>Cuidado médico confiable y expediente digital para tu mascota</h1>
             <p style="margin-top: var(--space-2); font-size: var(--text-lg);">
                 En <strong>Veterinaria Madri</strong> combinamos atención clínica cálida y accesible con un sistema moderno de carnet digital para que consultes las vacunas, peso e historial de tu mascota en cualquier momento.
@@ -13,6 +13,7 @@ use function App\Config\e;
             <div class="hero-actions">
                 <a href="/servicios" class="btn btn-primary">Ver Servicios Médicos</a>
                 <a href="/ubicacion" class="btn btn-outline">Cómo llegar a la clínica</a>
+                
             </div>
         </div>
 
