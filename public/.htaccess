@@ -1,3 +1,4 @@
+AddDefaultCharset UTF-8
 # Deshabilitar el listado de directorios (Ciberseguridad OWASP)
 Options -Indexes
 

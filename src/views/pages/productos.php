@@ -1,4 +1,3 @@
-
 <?php
 use App\Config\Database;
 use function App\Config\e;

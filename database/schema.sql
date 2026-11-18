@@ -1,3 +1,7 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+DROP DATABASE IF EXISTS `vetmadri_db`;
+
 -- ============================================================================
 -- ESQUEMA DE BASE DE DATOS EMPRESARIAL - VETERINARIA MADRI
 -- Motor: InnoDB | Charset: utf8mb4_unicode_ci | Estándar: 3FN + OWASP
