@@ -3,7 +3,7 @@
 **Última actualización:** Noviembre de 2026
 
 ## 1. Identidad y Domicilio del Responsable
-El titular responsable de la clínica (Persona Física con Actividad Empresarial registrada ante el SAT), operando comercialmente como **Veterinaria Madri**, con domicilio físico en **Ermita de San Sebastián 402, Fraccionamiento Villas de Nuestra Señora de la Asunción, C.P. 20126, Aguascalientes, Ags., México**, es responsable del tratamiento, uso y protección de los datos personales recabados de sus clientes y propietarios de pacientes.
+El titular responsable de la clínica JORGE TORRES HERNANDEZ, operando comercialmente como **Veterinaria Madri**, con domicilio físico en **Ermita de San Sebastián 402, Fraccionamiento Villas de Nuestra Señora de la Asunción, C.P. 20126, Aguascalientes, Ags., México**, es responsable del tratamiento, uso y protección de los datos personales recabados de sus clientes y propietarios de pacientes.
 
 ## 2. Datos Personales que se Recaban
 Para la prestación de servicios médicos veterinarios y la habilitación de la consulta digital de expedientes clínicos, **Veterinaria Madri** recaba únicamente los siguientes datos identificativos y de contacto directamente en recepción o consultorio:
@@ -22,7 +22,7 @@ Los datos personales recabados serán utilizados para las siguientes finalidades
 3. Realizar recordatorios o seguimiento médico directamente relacionado con refuerzos de vacunación, desparasitación o tratamientos activos.
 
 ### B. Finalidades Secundarias 
-De manera adicional, su información de contacto podrá utilizarse para enviar avisos sobre campañas preventivas de salud animal (esterilización o vacunación comunitaria), promociones en servicios de estética o novedades de la clínica. En caso de que no desee que sus datos personales sean tratados para estas finalidades secundarias, puede manifestarlo desde el momento de su registro en recepción o enviando un correo electrónico a `privacidad@veterinariamadri.mx`. La negativa para el uso de sus datos personales para estas finalidades no será motivo para negarle los servicios médicos veterinarios.
+De manera adicional, su información de contacto podrá utilizarse para enviar avisos sobre campañas preventivas de salud animal (esterilización o vacunación comunitaria), promociones en servicios de estética o novedades de la clínica. En caso de que no desee que sus datos personales sean tratados para estas finalidades secundarias, puede manifestarlo desde el momento de su registro en recepción o enviando un correo electrónico a `andresistorres@yahoo.com`. La negativa para el uso de sus datos personales para estas finalidades no será motivo para negarle los servicios médicos veterinarios.
 
 ## 4. Mecanismos de Protección, Enmascaramiento y Uso de Cookies
 Para salvaguardar la privacidad de los propietarios en el entorno digital:
